@@ -1,10 +1,15 @@
 import React from 'react';
 
-const Cell = ({makeAMark, cell}) => {
+const Cell = ({makeAMark, cell, checkForWin}) => {
 
     function handleClick(event) {
         makeAMark(event.target.id);
         document.documentElement.style.setProperty('--color','purple');
+    }
+
+    function handleChange() {
+        debugger;
+        checkForWin(); 
     }
    
     //const cellSize = 

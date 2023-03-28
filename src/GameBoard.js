@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import Cell from './Cell';
+import PlayerPhrase from './PlayerPhrase';
 
-const GameBoard = ({ boardSize }) => {
+const GameBoard = ({ boardSize, gameInProgress, gameOver }) => {
     const [ gameBoard, setGameBoard ] = useState(createBoard(boardSize));
     const [ currentPlayer, setCurrentPlayer ] = useState('X'); 
-    
+    let playerUpPhrase = ''; 
+
+
     function createBoard(boardSize) {
         const gameBoardData = [];
         for(let i = 0; i < boardSize; i++) {
             for(let j = 0; j < boardSize; j++) {
                 let cellLocation = {
-                    index: `${(boardSize * i) + j}`,
-                    'column':`${i}`,
-                    'row':`${j}`,
+                    'index': `${(boardSize * i) + j}`,
+                    'column':`${j}`,
+                    'row':`${i}`,
                     'mark':'',
                     'isLeftDiagonal': i === j,
                     'isRightDiagonal': i + j + 1 === boardSize,
@@ -24,26 +27,77 @@ const GameBoard = ({ boardSize }) => {
     }
 
     function makeAMark(index){
-        console.log(index);
+       // if that cell already has a mark, early return
+        if (gameBoard[index].mark || !gameInProgress) {
+            return
+        }
+        // otherwise, map the marked cell with the current player symbol,
+        // update statem check for win/draw, togggle player
         let updatedGameBoard = gameBoard.map( cell => { 
             return index.toString() === cell.index ? { ...cell, mark: currentPlayer } : cell; 
-        }); 
-        togglePlayer();
+        });  
+        checkForWin(updatedGameBoard);
         setGameBoard(updatedGameBoard);
-}   
+    }   
 
     function togglePlayer() {
         if (currentPlayer === 'X') {
             setCurrentPlayer('O');
         } else {setCurrentPlayer('X')};
     }
+
+    function checkForWin(updatedGameBoard) {
+        checkForAcrossWin(updatedGameBoard,'column');
+        checkForAcrossWin(updatedGameBoard,'row');
+        checkForDiagonalWin(updatedGameBoard);
+        checkForDraw(updatedGameBoard); 
+        togglePlayer();
+    }
+
+    function checkForAcrossWin(updatedGameBoard, direction) {
+        for(let i=0; i < boardSize; i++) {
+            let matchingAcross = updatedGameBoard.filter(match => match[direction] === `${i}`); 
+            let matchingAcrossAndMark = matchingAcross.filter(matchedMark => matchedMark.mark === `${currentPlayer}`);
+            if(matchingAcrossAndMark.length === boardSize) {
+                gameOver();
+                console.log('game-over');
+                playerUpPhrase = `${currentPlayer}'s Wins!`;
+                break;
+            }
+        }
+    }
+
+    function checkForDiagonalWin(updatedGameBoard) {
+        let rightDiagonalCells = updatedGameBoard.filter(cell => cell.isRightDiagonal);
+        let leftDiagonalCells = updatedGameBoard.filter(cell => cell.isLeftDiagonal);
+        let isRightDiagonalWin = rightDiagonalCells.filter(win => win.mark === `${currentPlayer}`); 
+        let isLeftDiagonalWin = leftDiagonalCells.filter(win => win.mark === `${currentPlayer}`); 
+        if(isRightDiagonalWin.length === boardSize || isLeftDiagonalWin.length === boardSize) {
+            gameOver();
+            playerUpPhrase = `${currentPlayer}'s Wins!`;
+        }
+    }
+
+    function checkForDraw(updatedGameBoard) {
+        let noEmptyCells = updatedGameBoard.filter(nonEmpty => nonEmpty.mark === '');
+        console.log(noEmptyCells);
+        if(noEmptyCells.length === 0 && gameInProgress) {
+            gameOver();
+            playerUpPhrase = `It's a Draw!`;
+            
+        } 
+    };
+
     return (
-        <div className={ 'grid-container' }>
-            {gameBoard.map(cell => (
-                <Cell key={cell.index} cell={cell} makeAMark={ makeAMark }/>
-            ))}
-        </div>
+        <>  
+            <PlayerPhrase currentPlayer = { currentPlayer } phrase={ playerUpPhrase } gameInProgress={ gameInProgress }/> 
+            <div className={ 'grid-container' }>
+                {gameBoard.map(cell => (
+                    <Cell key={cell.index} cell={cell} makeAMark={ makeAMark } checkForWin={ checkForWin }/>
+                ))}
+            </div>
+        </>
     )
 }
 
-export default GameBoard
+export default GameBoard;

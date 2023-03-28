@@ -3,7 +3,7 @@ import './App.css';
 import Header from './Header';
 import GameBoard from './GameBoard';
 import GameInstructions from './GameInstructions';
-import PlayerInput from './PlayerInput';
+import PlayerInput from './PlayerInput'; 
 
 function App() {
   const [ gameBuild, setGameBuild ] = useState(null);
@@ -20,7 +20,12 @@ function App() {
       gameInProgress: true,
     };
     setGameBuild( newGame ); 
+  }
 
+  function gameOver() {
+    const endGame = gameBuild;
+    endGame.gameInProgress = false;
+    setGameBuild( endGame );
   }
 
   return (
@@ -28,7 +33,7 @@ function App() {
       <Header/>
       <GameInstructions gameBuild= { gameBuild }/>
       <PlayerInput initializeBoard={ initializeBoard } gameBuild= { gameBuild } />
-      { gameBuild && <GameBoard boardSize={ gameBuild.boardSize }/>}
+      { gameBuild && <GameBoard boardSize={ gameBuild.boardSize } gameInProgress={ gameBuild.gameInProgress} gameOver={ gameOver }/>}
     </>
 
   );
