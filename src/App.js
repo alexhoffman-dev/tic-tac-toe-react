@@ -23,7 +23,7 @@ function App() {
   }
 
   function gameOver() {
-    const endGame = gameBuild;
+    const endGame = {...gameBuild};
     endGame.gameInProgress = false;
     setGameBuild( endGame );
   }
