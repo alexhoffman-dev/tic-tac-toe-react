@@ -9,10 +9,10 @@
 
 Header {
   font-family: monospace;
-    text-align: center;
-    text-decoration-line: underline;
-    color:aqua;
-    font-size: 40px;
+  text-align: center;
+  text-decoration-line: underline;
+  color:aqua;
+  font-size: 40px;
 }
 
 h1 {
@@ -28,7 +28,6 @@ h3 {
   text-align: center;
   color:greenyellow;
   font-size: 20px;
-
 }
 
 input, button {
@@ -43,7 +42,6 @@ input, button {
 }
 
 .hidden {
-
   display:none !important;
 }
 
@@ -133,5 +131,4 @@ input, button {
 #centerButton {
   display:flex;
   justify-content: center;
-  
 }

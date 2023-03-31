@@ -7,7 +7,6 @@ const GameBoard = ({ boardSize, gameInProgress, gameOver }) => {
     const [ currentPlayer, setCurrentPlayer ] = useState('X'); 
     let playerUpPhrase = ''; 
 
-
     function createBoard(boardSize) {
         const gameBoardData = [];
         for(let i = 0; i < boardSize; i++) {
@@ -27,23 +26,25 @@ const GameBoard = ({ boardSize, gameInProgress, gameOver }) => {
     }
 
     function makeAMark(index){
-       // if that cell already has a mark, early return
+       // If that cell already has a mark, early return.
         if (gameBoard[index].mark || !gameInProgress) {
             return
         }
-        // otherwise, map the marked cell with the current player symbol,
-        // update statem check for win/draw, togggle player
+        // Otherwise, map the marked cell with the current player symbol.
+        // Update state check for win/draw, toggle player.
         let updatedGameBoard = gameBoard.map( cell => { 
             return index.toString() === cell.index ? { ...cell, mark: currentPlayer } : cell; 
-        });  
+        });
         checkForWin(updatedGameBoard);
         setGameBoard(updatedGameBoard);
-    }   
+    }
 
     function togglePlayer() {
         if (currentPlayer === 'X') {
             setCurrentPlayer('O');
-        } else {setCurrentPlayer('X')};
+        } else {
+            setCurrentPlayer('X')
+        };
     }
 
     function checkForWin(updatedGameBoard) {
@@ -84,7 +85,6 @@ const GameBoard = ({ boardSize, gameInProgress, gameOver }) => {
         if(noEmptyCells.length === 0 && gameInProgress) {
             gameOver();
             playerUpPhrase = `It's a Draw!`;
-            
         } 
     };
 
@@ -97,7 +97,7 @@ const GameBoard = ({ boardSize, gameInProgress, gameOver }) => {
                 ))}
             </div>
         </>
-    )
+    );
 }
 
 export default GameBoard;
