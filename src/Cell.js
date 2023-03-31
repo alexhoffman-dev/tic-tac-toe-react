@@ -3,14 +3,11 @@ import React from 'react';
 const Cell = ({makeAMark, cell, checkForWin}) => {
     function handleClick(event) {
         makeAMark(event.target.id);
-        document.documentElement.style.setProperty('--color','purple');
+        // Random color generator for header 
+        document.documentElement.style.setProperty('--color',"rgb(" + Math.floor(Math.random() * 255)
+        + "," + Math.floor(Math.random() * 255) + ","
+        + Math.floor(Math.random() * 255) + ")");
     }
-
-    // Never Used:
-    // function handleChange() {
-    //     debugger;
-    //     checkForWin(); 
-    // }
 
     return (
         <div className={`cell ${cell.mark}`} id={cell.index} onClick={ handleClick }>{cell.mark}</div>

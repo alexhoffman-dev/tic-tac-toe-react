@@ -24,19 +24,20 @@ function App() {
   }
 
   function gameOver() {
-    const endGame = {...gameBuild};
-    endGame.gameInProgress = false;
+    const endGame = {...gameBuild, gameInProgress: false};
     setGameBuild( endGame );
   }
 
   return (
     <>
       <Header/>
-      <GameInstructions gameBuild= { gameBuild }/>
-      <PlayerInput initializeBoard={ initializeBoard } gameBuild= { gameBuild } />
-      { gameBuild &&
-        <GameBoard boardSize={ gameBuild.boardSize } gameInProgress={ gameBuild.gameInProgress} gameOver={ gameOver }/>
-      }
+      <div className='board-container'>
+        <GameInstructions gameBuild= { gameBuild }/>
+        <PlayerInput initializeBoard={ initializeBoard } gameBuild= { gameBuild } />
+        { gameBuild &&
+          <GameBoard boardSize={ gameBuild.boardSize } gameInProgress={ gameBuild.gameInProgress} gameOver={ gameOver }/>
+        }
+      </div> 
     </>
   );
 }

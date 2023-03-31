@@ -5,7 +5,7 @@ import PlayerPhrase from './PlayerPhrase';
 const GameBoard = ({ boardSize, gameInProgress, gameOver }) => {
     const [ gameBoard, setGameBoard ] = useState(createBoard(boardSize));
     const [ currentPlayer, setCurrentPlayer ] = useState('X'); 
-    let playerUpPhrase = ''; 
+    const [ playerUpPhrase, setPlayerUpPhrase ] = useState(); 
 
     function createBoard(boardSize) {
         const gameBoardData = [];
@@ -55,14 +55,16 @@ const GameBoard = ({ boardSize, gameInProgress, gameOver }) => {
         togglePlayer();
     }
 
+    // The Vertical and Horizontal win condition check functions reference shallow copies of gameBoard state arrays 
+    // with matching row or column data, then check to see if they share the same 'mark' property
+
     function checkForAcrossWin(updatedGameBoard, direction) {
         for(let i=0; i < boardSize; i++) {
             let matchingAcross = updatedGameBoard.filter(match => match[direction] === `${i}`); 
             let matchingAcrossAndMark = matchingAcross.filter(matchedMark => matchedMark.mark === `${currentPlayer}`);
             if(matchingAcrossAndMark.length === boardSize) {
                 gameOver();
-                console.log('game-over');
-                playerUpPhrase = `${currentPlayer}'s Wins!`;
+                setPlayerUpPhrase(`${currentPlayer}'s Wins!`);
                 break;
             }
         }
@@ -75,7 +77,7 @@ const GameBoard = ({ boardSize, gameInProgress, gameOver }) => {
         let isLeftDiagonalWin = leftDiagonalCells.filter(win => win.mark === `${currentPlayer}`); 
         if(isRightDiagonalWin.length === boardSize || isLeftDiagonalWin.length === boardSize) {
             gameOver();
-            playerUpPhrase = `${currentPlayer}'s Wins!`;
+            setPlayerUpPhrase(`${currentPlayer}'s Wins!`);
         }
     }
 
@@ -84,7 +86,7 @@ const GameBoard = ({ boardSize, gameInProgress, gameOver }) => {
         console.log(noEmptyCells);
         if(noEmptyCells.length === 0 && gameInProgress) {
             gameOver();
-            playerUpPhrase = `It's a Draw!`;
+            setPlayerUpPhrase(`It's a Draw!`);
         } 
     };
 
