@@ -98,6 +98,11 @@ input, button {
   opacity: 80%;
 }
 
+.resetButton {
+  position: absolute;
+  
+}
+
 #playerPhrase {
   font-family: monospace;
   font-size: 20px;

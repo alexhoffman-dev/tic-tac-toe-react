@@ -83,7 +83,6 @@ const GameBoard = ({ boardSize, gameInProgress, gameOver }) => {
 
     function checkForDraw(updatedGameBoard) {
         let noEmptyCells = updatedGameBoard.filter(nonEmpty => nonEmpty.mark === '');
-        console.log(noEmptyCells);
         if(noEmptyCells.length === 0 && gameInProgress) {
             gameOver();
             setPlayerUpPhrase(`It's a Draw!`);

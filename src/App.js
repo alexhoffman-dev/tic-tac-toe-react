@@ -4,6 +4,7 @@ import Header from './Header';
 import GameBoard from './GameBoard';
 import GameInstructions from './GameInstructions';
 import PlayerInput from './PlayerInput'; 
+import ResetButton from './ResetButton';
 
 function App() {
   const [ gameBuild, setGameBuild ] = useState(null);
@@ -13,9 +14,7 @@ function App() {
 
   function initializeBoard(boardSize) {
     // Takes a number from an input component and sets state with boardSize: int.
-    // setBoardState(...boardState, boardSize: number )
     document.documentElement.style.setProperty('--boardSize',boardSize);
-
     const newGame = {
       boardSize: boardSize,
       gameInProgress: true,
@@ -28,6 +27,10 @@ function App() {
     setGameBuild( endGame );
   }
 
+  function resetGame() {
+    setGameBuild(null); 
+  }
+
   return (
     <>
       <Header/>
@@ -35,11 +38,14 @@ function App() {
         <GameInstructions gameBuild= { gameBuild }/>
         <PlayerInput initializeBoard={ initializeBoard } gameBuild= { gameBuild } />
         { gameBuild &&
-          <GameBoard boardSize={ gameBuild.boardSize } gameInProgress={ gameBuild.gameInProgress} gameOver={ gameOver }/>
+        <>
+        <GameBoard boardSize={ gameBuild.boardSize } gameInProgress={ gameBuild.gameInProgress} gameOver={ gameOver }/>
+        <ResetButton gameInProgress={ gameBuild.gameInProgress} resetGame={ resetGame }/>
+        </>
         }
-      </div> 
+      </div>
     </>
-  );
+  )
 }
 
 export default App;
