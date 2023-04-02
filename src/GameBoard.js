@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Cell from './Cell';
 import PlayerPhrase from './PlayerPhrase';
 
-const GameBoard = ({ boardSize, gameInProgress, gameOver }) => {
+const GameBoard = ({ boardSize, resetGame }) => {
     const [ gameBoard, setGameBoard ] = useState(createBoard(boardSize));
     const [ currentPlayer, setCurrentPlayer ] = useState('X'); 
     const [playerUpPhrase, setPlayerUpPhrase] = useState('It\'s X\'s Turn!'); 
