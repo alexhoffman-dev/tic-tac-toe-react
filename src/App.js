@@ -4,7 +4,6 @@ import Header from './Header';
 import GameBoard from './GameBoard';
 import GameInstructions from './GameInstructions';
 import PlayerInput from './PlayerInput'; 
-import ResetButton from './ResetButton';
 
 function App() {
   const [ boardSize, setBoardSize ] = useState(null);
