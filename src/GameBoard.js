@@ -5,7 +5,7 @@ import PlayerPhrase from './PlayerPhrase';
 const GameBoard = ({ boardSize, gameInProgress, gameOver }) => {
     const [ gameBoard, setGameBoard ] = useState(createBoard(boardSize));
     const [ currentPlayer, setCurrentPlayer ] = useState('X'); 
-    const [ playerUpPhrase, setPlayerUpPhrase ] = useState(); 
+    const [playerUpPhrase, setPlayerUpPhrase] = useState('It\'s X\'s Turn!'); 
 
     function createBoard(boardSize) {
         const gameBoardData = [];
