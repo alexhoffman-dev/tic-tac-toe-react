@@ -1,8 +1,8 @@
 import React from 'react';
 
-const PlayerPhrase = ({currentPlayer, phrase, gameInProgress}) => {
+const PlayerPhrase = ({phrase}) => {
     return (
-      <h3>{ gameInProgress ? `It's ${currentPlayer} Turn! `: phrase }</h3>
+      <h3>{ phrase }</h3>
     );
 }
 

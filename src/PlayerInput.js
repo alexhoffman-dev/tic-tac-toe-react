@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 
-const PlayerInput = (props) => {
-    const [ boardSize, setBoardSize ] = useState(3);
+const PlayerInput = ({initializeBoard}) => {
+    const [ currentBoardSize, setCurrentBoardSize ] = useState(3);
 
     const handleClick = () => {
-        props.initializeBoard( boardSize );
-        setBoardSize("");
+        initializeBoard(currentBoardSize );
+        setCurrentBoardSize("");
     }
 
     const handleChange = (event) => {
-        setBoardSize(event.target.value);
+        setCurrentBoardSize(parseInt(event.target.value));
     }
 
     return (
-        <div className={ props.gameBuild ? 'hidden' : '' }>
-            <input type={ 'number' } min={3} max={25} value={ boardSize } onChange={ handleChange } required ></input>
+        <div>
+            <input type={'number'} min={3} max={25} value={ currentBoardSize } onChange={ handleChange } required ></input>
             <button onClick={ handleClick }>PLAY!</button> 
         </div>
     );

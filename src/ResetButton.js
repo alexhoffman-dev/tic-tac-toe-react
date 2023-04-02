@@ -1,15 +1,8 @@
 import React from 'react';
 
-const ResetButton = ({resetGame, gameInProgress}) => {
-    
-    function handleClick() {
-        resetGame();
-    }
-    
+const ResetButton = ({resetGame}) => {
     return (
-        <button className={ gameInProgress ? 'hidden' : '' } onClick={ handleClick }>
-            RESET
-        </button>
+        <button onClick={ resetGame }> RESET </button>
     );
 }
 
