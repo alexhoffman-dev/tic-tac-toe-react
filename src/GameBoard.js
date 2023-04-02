@@ -60,8 +60,8 @@ const GameBoard = ({ boardSize, resetGame }) => {
             setPlayerUpPhrase(`It's a Draw!`);
             setGameInProgress(false);
         } else {
-        togglePlayer();
-    }
+            togglePlayer();
+        }
     }
 
     // The Vertical and Horizontal win condition check functions reference shallow copies of gameBoard state arrays 
@@ -96,7 +96,7 @@ const GameBoard = ({ boardSize, resetGame }) => {
         let noEmptyCells = updatedGameBoard.filter(nonEmpty => nonEmpty.mark === '');
         if(noEmptyCells.length === 0 && gameInProgress) {
             hasWon = true;
-        } 
+        }
         return hasWon;
     }
 
