@@ -40,11 +40,9 @@ const GameBoard = ({ boardSize, gameInProgress, gameOver }) => {
     }
 
     function togglePlayer() {
-        if (currentPlayer === 'X') {
-            setCurrentPlayer('O');
-        } else {
-            setCurrentPlayer('X')
-        };
+        const newCurrentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        setCurrentPlayer(newCurrentPlayer);
+        setPlayerUpPhrase(`It's ${newCurrentPlayer}'s Turn!`);
     }
 
     function checkForWin(updatedGameBoard) {
