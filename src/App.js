@@ -9,8 +9,7 @@ function App() {
   const [ boardSize, setBoardSize ] = useState(null);
 
   // The board state is going to take a number (n) and create that number of n x n tiles. 
-  // Each of those tiles will be represented by an object with an ID, value,  
-
+  // Each of those tiles will be represented by an object with an ID, value, etc.
   function initializeBoard(boardSize) {
     // Takes a number from an input component and sets state with boardSize: int.
     document.documentElement.style.setProperty('--boardSize', boardSize);
@@ -32,7 +31,7 @@ function App() {
         }
       </div>
     </>
-  )
+  );
 }
 
 export default App;
