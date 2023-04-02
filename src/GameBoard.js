@@ -102,8 +102,8 @@ const GameBoard = ({ boardSize, resetGame }) => {
 
     return (
         <>  
-            {gameInProgress &&
-                <PlayerPhrase phrase={playerUpPhrase} />
+            { gameInProgress && 
+                <PlayerPhrase phrase={ playerUpPhrase }/> 
             }
             <div className={ 'grid-container' }>
                 {gameBoard.map(cell => (
