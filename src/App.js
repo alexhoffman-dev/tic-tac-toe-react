@@ -35,13 +35,9 @@ function App() {
     <>
       <Header/>
       <div className='board-container'>
-        <GameInstructions gameBuild= { gameBuild }/>
-        <PlayerInput initializeBoard={ initializeBoard } gameBuild= { gameBuild } />
-        { gameBuild &&
-        <>
-        <GameBoard boardSize={ gameBuild.boardSize } gameInProgress={ gameBuild.gameInProgress} gameOver={ gameOver }/>
-        <ResetButton gameInProgress={ gameBuild.gameInProgress} resetGame={ resetGame }/>
-        </>
+        {boardSize ?
+            <GameBoard boardSize={ boardSize } resetGame={ resetGame }/> :
+            <PlayerInput initializeBoard={ initializeBoard } boardSize= { boardSize } />
         }
       </div>
     </>
