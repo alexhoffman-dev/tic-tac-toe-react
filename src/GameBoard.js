@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Cell from './Cell';
+import ResetButton from './ResetButton';
 import PlayerPhrase from './PlayerPhrase';
 
 const GameBoard = ({ boardSize, resetGame }) => {
@@ -97,6 +98,9 @@ const GameBoard = ({ boardSize, resetGame }) => {
                     <Cell key={cell.index} cell={cell} makeAMark={ makeAMark } checkForWin={ checkForWin }/>
                 ))}
             </div>
+            { !gameInProgress && 
+                <ResetButton resetGame={resetGame} />
+            }
         </>
     );
 }
