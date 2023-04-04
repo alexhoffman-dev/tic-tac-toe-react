@@ -78,10 +78,12 @@ input, button {
   flex-direction: column;
 }
 .cell {
+  display: flex;
   border: 1px solid;
   border-color:aqua;
   font-family:sans-serif;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 }
 
